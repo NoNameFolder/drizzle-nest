@@ -71,10 +71,11 @@ export const chatsRelations = relations(chats, ({ many }) => ({
 export const usersToChats = pgTable(
   'users_to_chats',
   {
+    id: serial(),
     userId: integer().references(() => users.id),
     chatId: integer().references(() => chats.id),
   },
-  (t) => [primaryKey({ columns: [t.userId, t.chatId] })],
+  (t) => [primaryKey({ columns: [t.id, t.userId, t.chatId] })],
 );
 
 export const usersToChatsRelations = relations(usersToChats, ({ one }) => ({
